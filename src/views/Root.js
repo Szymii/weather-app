@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.main``;
 
 const Root = () => {
-  const [marian, setMarian] = useState('false');
-
-  useEffect(() => {
-    console.log(marian);
-  }, []);
-
   return (
-    <div>
-      <button onClick={() => setMarian((prev) => !prev)}>Hello</button>
-    </div>
+    <Wrapper>
+      <button>Hello</button>
+    </Wrapper>
   );
 };
 
