@@ -37,6 +37,7 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
+    host: '0.0.0.0',
     inline: true,
     hot: true,
   },

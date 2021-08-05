@@ -8,8 +8,11 @@ import styled, { ThemeProvider } from 'styled-components';
 import AppProvider from '../AppProvider';
 import { theme } from '../styles/theme';
 
+import { Provider } from 'react-redux';
+import store from '../store';
+
 const Wrapper = styled.main`
-  padding-top: 20vh;
+  padding-top: 10em;
   height: 100vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -17,29 +20,31 @@ const Wrapper = styled.main`
 `;
 
 const StyledSection = styled.section`
-  scroll-margin-top: 20vh;
-  height: 80vh;
+  scroll-margin-top: 10em;
+  height: calc(100vh - 10em);
   scroll-snap-align: start;
 `;
 
 const Root = () => {
   return (
-    <AppProvider>
-      <ThemeProvider theme={theme}>
-        <Wrapper>
-          <Navigation />
-          <StyledSection>
-            <Main />
-          </StyledSection>
-          <StyledSection>
-            <Details />
-          </StyledSection>
-          <StyledSection>
-            <Forecast />
-          </StyledSection>
-        </Wrapper>
-      </ThemeProvider>
-    </AppProvider>
+    <Provider store={store}>
+      <AppProvider>
+        <ThemeProvider theme={theme}>
+          <Wrapper>
+            <Navigation />
+            <StyledSection>
+              <Main />
+            </StyledSection>
+            <StyledSection>
+              <Details />
+            </StyledSection>
+            <StyledSection>
+              <Forecast />
+            </StyledSection>
+          </Wrapper>
+        </ThemeProvider>
+      </AppProvider>
+    </Provider>
   );
 };
 
