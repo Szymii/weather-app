@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './views/Root';
-import { GlobalStyle } from './styles/GlobalStyles';
-import './styles/fonts.css';
+import { GlobalStyle } from './assets/styles/GlobalStyles';
+import './assets/styles/fonts.css';
 
 ReactDOM.render(
   <React.StrictMode>

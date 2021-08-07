@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Forecast = () => {
-  return <div>Forecast</div>;
+  return <div></div>;
 };
 
 export default Forecast;

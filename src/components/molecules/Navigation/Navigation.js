@@ -1,22 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { useSelector } from 'react-redux';
 import IconBtn from '../../atoms/IconBtn/IconBtn';
 import Location from '../../atoms/Location/Location';
+import map from '../../../assets/icons/map.svg';
 
 const StyledNav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 10em;
+  height: 20vh;
   padding: 0 1.6em;
   display: grid;
   align-items: center;
-  background: linear-gradient(
-    rgba(255, 255, 255, 1) 70%,
-    rgba(255, 255, 255, 0.2)
-  );
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Wrapper = styled.div`
@@ -27,17 +25,24 @@ const Wrapper = styled.div`
 const BtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 1em;
+  gap: 1.6em;
 `;
 
 const Navigation = () => {
+  const state = useSelector((state) => state.locations[0]);
+
   return (
     <StyledNav>
       <Wrapper>
-        <Location location="Mumbai" />
+        <Location location={state?.city} />
         <BtnWrapper>
-          <IconBtn>Map</IconBtn>
-          <IconBtn>Toggler</IconBtn>
+          <IconBtn>
+            <img src={map} alt="map" />
+          </IconBtn>
+          <IconBtn>
+            <img src={map} alt="map" />
+            {/*theme toggler */}
+          </IconBtn>
         </BtnWrapper>
       </Wrapper>
     </StyledNav>

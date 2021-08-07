@@ -7,6 +7,7 @@ export const theme = {
   fs: {
     s: '0.75rem',
     m: '1rem',
+    xm: '1.25rem',
     l: '1.5rem',
     xl: '1.75rem',
   },
