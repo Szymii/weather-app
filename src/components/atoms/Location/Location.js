@@ -12,7 +12,7 @@ const City = styled.div`
 `;
 
 const Description = styled.div`
-  font-size: ${({ theme }) => theme.fs.s};
+  font-size: ${({ theme }) => theme.fs.xs};
   color: ${({ theme }) => theme.colors.middle};
 `;
 

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Sync = styled.span`
-  font-size: ${({ theme }) => theme.fs.s};
+  font-size: ${({ theme }) => theme.fs.xs};
 `;
 
 const StyledTemperature = styled.div`

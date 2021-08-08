@@ -5,7 +5,8 @@ export const theme = {
     white: '#ffffff',
   },
   fs: {
-    s: '0.75rem',
+    xs: '0.75rem',
+    s: '0.875rem',
     m: '1rem',
     xm: '1.25rem',
     l: '1.5rem',

@@ -23,3 +23,13 @@ export const extractHour = (unix) => {
     minute: 'numeric',
   });
 };
+
+export const extractDay = (unix) => {
+  const milliseconds = unix * 1000;
+  const dateObject = new Date(milliseconds);
+
+  return dateObject.toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+  });
+};

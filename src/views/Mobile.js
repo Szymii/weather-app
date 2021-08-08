@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import Main from '../components/organisms/Main/Main';
 import Details from '../components/organisms/Details/Details';
@@ -29,22 +29,29 @@ const Mobile = () => {
   const state = useSelector((state) => state.locations);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) =>
-        dispatch(
-          getLocalWeather({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          })
-        )
+  const success = useCallback(
+    (position) => {
+      dispatch(
+        getLocalWeather({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        })
       );
-    } else {
-      dispatch(getLocalWeather());
-    }
+    },
+    [dispatch]
+  );
+
+  const error = useCallback(() => {
+    dispatch(getLocalWeather({}));
   }, [dispatch]);
 
-  console.log(state);
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      dispatch(getLocalWeather({}));
+    }
+  }, [dispatch, error, success]);
 
   return (
     <Wrapper>
@@ -54,13 +61,13 @@ const Mobile = () => {
         <>
           <Navigation />
           <StyledSection>
-            <Main />
+            <Forecast />
           </StyledSection>
           <StyledSection>
             <Details />
           </StyledSection>
           <StyledSection>
-            <Forecast />
+            <Main />
           </StyledSection>
         </>
       )}
