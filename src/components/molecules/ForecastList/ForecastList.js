@@ -13,7 +13,6 @@ const StyledList = styled.ul`
 
 const ForecastList = ({ daily, list }) => {
   const forecast = daily ? list : list.slice(0, 12);
-  console.log(forecast[0]);
 
   return (
     <StyledList>

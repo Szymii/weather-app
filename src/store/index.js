@@ -45,13 +45,20 @@ const locationSlice = createSlice({
       const coord = action.payload.data.coord;
       const {
         dt,
-        main,
+        main: details,
         visibility,
         wind,
         sys,
         weather: description,
       } = action.payload.data;
-      const weather = { dt, main, visibility, wind, sys, ...description };
+      const weather = {
+        dt,
+        details,
+        visibility,
+        wind,
+        sys,
+        ...description[0],
+      };
       return [{ city, coord, weather }];
     });
 

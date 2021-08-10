@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledLi = styled.li`
   display: flex;
   flex-direction: column;
-  gap: 0.3em;
+  gap: 0.15em;
 `;
 
 const StyledTitle = styled.h3`

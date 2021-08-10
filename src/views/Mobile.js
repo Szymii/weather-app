@@ -61,13 +61,13 @@ const Mobile = () => {
         <>
           <Navigation />
           <StyledSection>
-            <Forecast />
+            <Main />
           </StyledSection>
           <StyledSection>
             <Details />
           </StyledSection>
           <StyledSection>
-            <Main />
+            <Forecast />
           </StyledSection>
         </>
       )}

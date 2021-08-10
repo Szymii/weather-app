@@ -31,8 +31,19 @@ const InlineWrapper = styled.div`
   gap: 1.25em;
 `;
 
+const StyledImg = styled.img`
+  width: 10em;
+  height: auto;
+`;
+
+const StyledDescription = styled.p`
+  margin-top: -2em;
+`;
+
 const Main = () => {
-  const { dt, main, sys } = useSelector((state) => state.locations[0]?.weather);
+  const { dt, details, sys, main, icon, description } = useSelector(
+    (state) => state.locations[0]?.weather
+  );
 
   return (
     <Wrapper>
@@ -40,19 +51,23 @@ const Main = () => {
       <Sync>in sync</Sync>
       <div>{getDateFromUnix(dt)}</div>
       <StyledTemperature>
-        {round(main.temp)}
+        {round(details.temp)}
         <StyledUnit>&#176;C</StyledUnit>
       </StyledTemperature>
       <InlineWrapper>
-        {/* zmiana temp min i max */}
         <DecoratorIcon icon="arrowDown">
-          {round(main.temp_min)}&#176;C
+          {round(details.temp_min)}&#176;C
         </DecoratorIcon>
         <DecoratorIcon icon="arrowUp">
-          {round(main.temp_max)}&#176;C
+          {round(details.temp_max)}&#176;C
         </DecoratorIcon>
       </InlineWrapper>
-      {/* weather icon */}
+      <StyledImg
+        src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+        alt={main}
+        aria-label={description}
+      />
+      <StyledDescription>{description}</StyledDescription>
       <InlineWrapper>
         <DecoratorIcon icon="sunrise">{extractHour(sys.sunrise)}</DecoratorIcon>
         <DecoratorIcon icon="sunset">{extractHour(sys.sunset)}</DecoratorIcon>
