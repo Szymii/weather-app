@@ -33,3 +33,12 @@ export const extractDay = (unix) => {
     month: 'short',
   });
 };
+
+export const toCapitalLetter = (string) => {
+  const stringArr = string.split(' ');
+  const capital = stringArr.map(
+    (word) => word.charAt(0).toUpperCase() + word.substring(1)
+  );
+
+  return capital.join(' ');
+};

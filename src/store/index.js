@@ -26,19 +26,23 @@ export const getForecat = createAsyncThunk(
     return { data };
   }
 );
+const userPrefersDark =
+  window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+const themeSlice = createSlice({
+  name: 'themes',
+  initialState: userPrefersDark ? 'dark' : 'light',
+  reducers: {
+    toggleTheme: (state, action) => {
+      return action.payload.theme;
+    },
+  },
+});
 
 const locationSlice = createSlice({
   name: 'locations',
   initialState: [],
-  reducers: {
-    addCity: (state, action) => {
-      const newLocataion = {
-        city: action.payload.city,
-        weather: {},
-      };
-      state.push(newLocataion);
-    },
-  },
   extraReducers: (builder) => {
     builder.addCase(getLocalWeather.fulfilled, (state, action) => {
       const city = action.payload.data.name;
@@ -77,8 +81,9 @@ const locationSlice = createSlice({
 const store = configureStore({
   reducer: {
     locations: locationSlice.reducer,
+    themes: themeSlice.reducer,
   },
 });
 
-export const { addCity } = locationSlice.actions;
+export const { toggleTheme } = themeSlice.actions;
 export default store;

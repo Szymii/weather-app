@@ -5,6 +5,10 @@ import arrowDown from '../../../assets/icons/arrowDown.svg';
 import sunrise from '../../../assets/icons/sunrise.svg';
 import sunset from '../../../assets/icons/sunset.svg';
 
+const Wrapper = styled.div`
+  color: ${({ theme }) => theme.colors.middle};
+`;
+
 const StyledArrow = styled.img`
   display: inline-block;
   padding: 0 0.3em;
@@ -30,10 +34,10 @@ const DecoratorIcon = ({ children, icon }) => {
   const arrow = selectIcon(icon);
 
   return (
-    <div>
+    <Wrapper>
       {arrow}
       {children}
-    </div>
+    </Wrapper>
   );
 };
 

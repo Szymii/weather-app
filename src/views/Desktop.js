@@ -5,38 +5,29 @@ import Details from '../components/organisms/Details/Details';
 import Forecast from '../components/organisms/Forecast/Forecast';
 import Navigation from '../components/molecules/Navigation/Navigation';
 
-const Wrapper = styled.main`
-  padding-top: 20vh;
-  display: flex;
-  height: 100vh;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
+const Wrapper = styled.div`
+  padding: 0 10em;
+  min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-const StyledSection = styled.section`
-  flex: none;
-  width: 100vw;
-  scroll-snap-align: start;
-  padding: 0 1.6em;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
 `;
 
-const Mobile = () => {
+const Desktop = () => {
   return (
     <Wrapper>
-      <Navigation />
-      <StyledSection>
+      <Grid>
+        <Navigation />
         <Main />
-      </StyledSection>
-      <StyledSection>
         <Details />
-      </StyledSection>
-      <StyledSection>
         <Forecast />
-      </StyledSection>
+      </Grid>
     </Wrapper>
   );
 };
 
-export default Mobile;
+export default Desktop;

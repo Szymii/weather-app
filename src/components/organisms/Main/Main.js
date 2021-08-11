@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import DecoratorIcon from '../../atoms/DecoratorIcon/DecoratorIcon';
 import { useSelector } from 'react-redux';
-import { round, extractHour, getDateFromUnix } from '../../../utils/utils';
+import {
+  round,
+  extractHour,
+  getDateFromUnix,
+  toCapitalLetter,
+} from '../../../utils/utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,10 +15,11 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 1.4em;
   color: ${({ theme }) => theme.colors.middle};
-`;
+  padding-bottom: 2em;
 
-const Sync = styled.span`
-  font-size: ${({ theme }) => theme.fs.xs};
+  @media (min-width: ${({ theme }) => theme.media.desktop}) {
+    grid-column: 1 / 2;
+  }
 `;
 
 const StyledTemperature = styled.div`
@@ -31,9 +37,12 @@ const InlineWrapper = styled.div`
   gap: 1.25em;
 `;
 
-const StyledImg = styled.img`
-  width: 10em;
-  height: auto;
+const ImageWrapper = styled.div`
+  margin-top: -1.4em;
+  height: 8em;
+  img {
+    height: 100%;
+  }
 `;
 
 const StyledDescription = styled.p`
@@ -47,8 +56,6 @@ const Main = () => {
 
   return (
     <Wrapper>
-      {/* Sync jako osobny komponent obsługujący błedy z polaczeniem */}
-      <Sync>in sync</Sync>
       <div>{getDateFromUnix(dt)}</div>
       <StyledTemperature>
         {round(details.temp)}
@@ -62,12 +69,14 @@ const Main = () => {
           {round(details.temp_max)}&#176;C
         </DecoratorIcon>
       </InlineWrapper>
-      <StyledImg
-        src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
-        alt={main}
-        aria-label={description}
-      />
-      <StyledDescription>{description}</StyledDescription>
+      <ImageWrapper>
+        <img
+          src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+          alt={main}
+          aria-label={description}
+        />
+      </ImageWrapper>
+      <StyledDescription>{toCapitalLetter(description)}</StyledDescription>
       <InlineWrapper>
         <DecoratorIcon icon="sunrise">{extractHour(sys.sunrise)}</DecoratorIcon>
         <DecoratorIcon icon="sunset">{extractHour(sys.sunset)}</DecoratorIcon>

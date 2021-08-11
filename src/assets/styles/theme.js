@@ -1,4 +1,4 @@
-export const theme = {
+export const light = {
   colors: {
     black: '#000000',
     middle: '#616161',
@@ -12,4 +12,19 @@ export const theme = {
     l: '1.5rem',
     xl: '1.75rem',
   },
+  media: {
+    desktop: '970px',
+  },
+  contrast: 'contrast(500%)',
+};
+
+export const dark = {
+  colors: {
+    black: light.colors.white,
+    middle: light.colors.middle,
+    white: light.colors.black,
+  },
+  fs: light.fs,
+  media: light.media,
+  contrast: 'contrast(0%)',
 };

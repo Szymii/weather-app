@@ -9,12 +9,14 @@ const ListItem = styled.li`
   gap: 0.4em;
   flex-direction: column;
   font-size: ${({ theme }) => theme.fs.xs};
+  &:first-child {
+    color: ${({ theme }) => theme.colors.black};
+  }
 `;
 
 const StyledTime = styled.div`
   display: flex;
   font-size: ${({ theme }) => theme.fs.m};
-  color: ${({ theme }) => theme.colors.black};
 `;
 
 const StyledImg = styled.img`
