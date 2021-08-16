@@ -8,7 +8,7 @@ const StyledList = styled.ul`
   display: flex;
   gap: 1.9em;
   padding: 0.8em 0;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 
 const ForecastList = ({ daily, list }) => {

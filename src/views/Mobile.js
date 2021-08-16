@@ -13,6 +13,7 @@ const Wrapper = styled.main`
   scroll-snap-type: x mandatory;
   overflow-x: scroll;
   background-color: ${({ theme }) => theme.colors.white};
+  transition: background-color 0.4s ease, color 0.4s ease;
 `;
 
 const StyledSection = styled.section`

@@ -19,6 +19,7 @@ const Wrapper = styled.div`
 
   @media (min-width: ${({ theme }) => theme.media.desktop}) {
     grid-column: 1 / 2;
+    /* align-items: flex-start; */
   }
 `;
 

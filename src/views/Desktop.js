@@ -6,12 +6,14 @@ import Forecast from '../components/organisms/Forecast/Forecast';
 import Navigation from '../components/molecules/Navigation/Navigation';
 
 const Wrapper = styled.div`
-  padding: 0 10em;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.white};
+  transition: background-color 0.4s ease, color 0.4s ease;
 `;
 
 const Grid = styled.div`
+  margin: 0 auto;
+  max-width: 60em;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;

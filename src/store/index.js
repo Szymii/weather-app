@@ -30,12 +30,18 @@ const userPrefersDark =
   window.matchMedia &&
   window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-const themeSlice = createSlice({
-  name: 'themes',
-  initialState: userPrefersDark ? 'dark' : 'light',
+const stateSlice = createSlice({
+  name: 'states',
+  initialState: {
+    theme: userPrefersDark ? 'dark' : 'light',
+    isSelectOpen: false,
+  },
   reducers: {
     toggleTheme: (state, action) => {
-      return action.payload.theme;
+      return { ...state, theme: action.payload.theme };
+    },
+    toggleSelect: (state, action) => {
+      return { ...state, isSelectOpen: action.payload.isSelectOpen };
     },
   },
 });
@@ -81,9 +87,9 @@ const locationSlice = createSlice({
 const store = configureStore({
   reducer: {
     locations: locationSlice.reducer,
-    themes: themeSlice.reducer,
+    states: stateSlice.reducer,
   },
 });
 
-export const { toggleTheme } = themeSlice.actions;
+export const { toggleTheme, toggleSelect } = stateSlice.actions;
 export default store;

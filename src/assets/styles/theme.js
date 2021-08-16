@@ -13,7 +13,7 @@ export const light = {
     xl: '1.75rem',
   },
   media: {
-    desktop: '970px',
+    desktop: '1000px',
   },
   contrast: 'contrast(500%)',
 };
