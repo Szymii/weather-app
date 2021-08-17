@@ -9,6 +9,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.colors.black};
+
+  @media (min-width: ${({ theme }) => theme.media.desktop}) {
+    align-items: center;
+  }
 `;
 
 const StyledList = styled.ul`
@@ -16,6 +20,10 @@ const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1.2em;
+
+  @media (min-width: ${({ theme }) => theme.media.desktop}) {
+    align-items: center;
+  }
 `;
 
 const Details = () => {

@@ -5,9 +5,10 @@ const API_KEY = 'dbcbada632dd31f95f28b01fb8d69edb';
 
 export const getLocalWeather = createAsyncThunk(
   'weather/getLocalWeather',
-  async ({ lat = 52.22977, lon = 21.01178 }) => {
-    const api_url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-
+  async ({ city, lat = 52.22977, lon = 21.01178 }) => {
+    let api_url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+    if (city)
+      api_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
     const response = await fetch(api_url);
     const data = await response.json();
 
@@ -26,6 +27,7 @@ export const getForecat = createAsyncThunk(
     return { data };
   }
 );
+
 const userPrefersDark =
   window.matchMedia &&
   window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -69,7 +71,7 @@ const locationSlice = createSlice({
         sys,
         ...description[0],
       };
-      return [{ city, coord, weather }];
+      return [...state, { city, coord, weather }];
     });
 
     builder.addCase(getForecat.fulfilled, (state, action) => {

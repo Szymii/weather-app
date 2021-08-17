@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Title } from '../Title/Title';
+import { round } from '../../../utils/utils';
 
 const StyledLi = styled.li`
   margin-top: 1em;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`
@@ -23,20 +25,20 @@ const StyledDescription = styled.div`
   font-size: ${({ theme }) => theme.fs.s};
 `;
 
-const StyledCity = () => {
+const City = ({ value }) => {
   return (
     <StyledLi>
       <Wrapper>
-        <StyledTitle>{'Mumbai'}</StyledTitle>
-        <div>{'22'}&#176;C</div>
-        <StyledDescription>{'Light Drizzle'}</StyledDescription>
+        <StyledTitle>{value.city}</StyledTitle>
+        <div>{round(value.weather.details.temp)}&#176;C</div>
+        <StyledDescription>{value.weather.main}</StyledDescription>
       </Wrapper>
       <img
-        src={`https://openweathermap.org/img/wn/${'10d'}@2x.png`}
+        src={`https://openweathermap.org/img/wn/${value.weather.icon}@2x.png`}
         alt="weather"
       />
     </StyledLi>
   );
 };
 
-export default StyledCity;
+export default City;

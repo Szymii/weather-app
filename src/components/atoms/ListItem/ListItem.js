@@ -5,6 +5,10 @@ const StyledLi = styled.li`
   display: flex;
   flex-direction: column;
   gap: 0.15em;
+
+  @media (min-width: ${({ theme }) => theme.media.desktop}) {
+    align-items: center;
+  }
 `;
 
 const StyledTitle = styled.h3`
