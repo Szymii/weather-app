@@ -19,18 +19,16 @@ const StyledNav = styled.nav`
   color: ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.white};
   transition: background-color 0.4s ease, color 0.4s ease;
-
-  @media (min-width: ${({ theme }) => theme.media.desktop}) {
-    position: relative;
-    height: 10vh;
-    grid-column: 1 / 3;
-    padding: 0;
-  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  @media (min-width: ${({ theme }) => theme.media.desktop}) {
+    width: 100%;
+    max-width: 64em;
+    margin: 0 auto;
+  }
 `;
 
 const BtnWrapper = styled.div`

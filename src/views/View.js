@@ -6,14 +6,22 @@ import Forecast from '../components/organisms/Forecast/Forecast';
 import Navigation from '../components/molecules/Navigation/Navigation';
 
 const Wrapper = styled.main`
-  padding-top: 20vh;
+  margin-top: 20vh;
   display: flex;
-  height: 100vh;
+  height: 80vh;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   overflow-x: scroll;
   background-color: ${({ theme }) => theme.colors.white};
   transition: background-color 0.4s ease, color 0.4s ease;
+
+  @media (min-width: ${({ theme }) => theme.media.desktop}) {
+    width: 100vw;
+    flex-direction: column;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    overflow-x: auto;
+  }
 `;
 
 const StyledSection = styled.section`
@@ -21,9 +29,16 @@ const StyledSection = styled.section`
   width: 100vw;
   scroll-snap-align: start;
   padding: 0 1.6em;
+
+  @media (min-width: ${({ theme }) => theme.media.desktop}) {
+    width: 100%;
+    max-width: 60em;
+    height: 80vh;
+    margin: 0 auto;
+  }
 `;
 
-const Mobile = () => {
+const View = () => {
   return (
     <Wrapper>
       <Navigation />
@@ -40,4 +55,4 @@ const Mobile = () => {
   );
 };
 
-export default Mobile;
+export default View;

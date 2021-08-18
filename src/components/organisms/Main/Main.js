@@ -16,11 +16,6 @@ const Wrapper = styled.div`
   gap: 1.4em;
   color: ${({ theme }) => theme.colors.middle};
   padding-bottom: 2em;
-
-  @media (min-width: ${({ theme }) => theme.media.desktop}) {
-    grid-column: 1 / 2;
-    /* align-items: flex-start; */
-  }
 `;
 
 const StyledTemperature = styled.div`

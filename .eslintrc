@@ -1,6 +1,8 @@
 {
   "extends": ["react-app"],
-  "rules": {},
+  "rules": {
+    "no-warning-comments": [1, { "location": "anywhere" }]
+  },
   "env": {
     "browser": true,
     "node": true,

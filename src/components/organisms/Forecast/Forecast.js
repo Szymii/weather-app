@@ -9,13 +9,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.colors.black};
-
-  @media (min-width: ${({ theme }) => theme.media.desktop}) {
-    grid-column: 1 / 3;
-    h2 {
-      display: none;
-    }
-  }
 `;
 
 const ForecastWrapper = styled.div`

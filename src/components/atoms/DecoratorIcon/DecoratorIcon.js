@@ -20,9 +20,6 @@ const StyledSun = styled.img`
   padding: 0 0.5em;
   height: 1.1em;
   vertical-align: text-top;
-  @media (min-width: ${({ theme }) => theme.media.desktop}) {
-    padding-left: 0;
-  }
 `;
 
 const DecoratorIcon = ({ children, icon }) => {

@@ -3,9 +3,7 @@ import { getLocalWeather } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { light, dark } from '../assets/styles/theme';
-import Mobile from './Mobile';
-import Desktop from './Desktop';
-import useDimensions from '../hooks/useDimensions';
+import View from './View';
 import Select from '../components/organisms/Select/Select';
 import styled from 'styled-components';
 
@@ -17,21 +15,8 @@ const Wrapper = styled.div`
 const GlobalWrapper = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { width } = useDimensions();
 
   const theme = state.states.theme === 'light' ? light : dark;
-  const view =
-    width < 1000 ? (
-      <Wrapper>
-        <Mobile />
-        <Select />
-      </Wrapper>
-    ) : (
-      <Wrapper>
-        <Desktop />
-        <Select />
-      </Wrapper>
-    );
 
   const success = useCallback(
     (position) => {
@@ -62,7 +47,12 @@ const GlobalWrapper = () => {
       {!state.locations.length ? (
         <>Loading...</>
       ) : (
-        <ThemeProvider theme={theme}>{view}</ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <Wrapper>
+            <View />
+            <Select />
+          </Wrapper>
+        </ThemeProvider>
       )}
     </>
   );

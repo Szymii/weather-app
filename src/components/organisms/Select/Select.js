@@ -76,7 +76,6 @@ const Select = () => {
     } else {
       setVisible((prev) => !prev);
       inputEl.current.style.visibility = 'hidden';
-      //Walidacja
       dispatch(getLocalWeather({ city: inputEl.current.value }));
       inputEl.current.value = '';
     }
