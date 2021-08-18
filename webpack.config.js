@@ -1,5 +1,6 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const mode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
@@ -24,6 +25,7 @@ module.exports = {
       },
     ],
   },
+  plugins: [new Dotenv()],
   optimization: {
     minimizer: [
       new TerserPlugin({

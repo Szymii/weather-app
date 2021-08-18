@@ -1,14 +1,14 @@
 import { configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-const API_KEY = 'dbcbada632dd31f95f28b01fb8d69edb';
+const key = process.env.API_KEY;
 
 export const getLocalWeather = createAsyncThunk(
   'weather/getLocalWeather',
   async ({ city, lat = 52.22977, lon = 21.01178 }) => {
-    let api_url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+    let api_url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${key}`;
     if (city)
-      api_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
+      api_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`;
     const response = await fetch(api_url);
     const data = await response.json();
 
@@ -19,7 +19,7 @@ export const getLocalWeather = createAsyncThunk(
 export const getForecat = createAsyncThunk(
   'weather/getForecast',
   async ({ lat, lon }) => {
-    const api_url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=alerts,current,minutely&appid=${API_KEY}`;
+    const api_url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=alerts,current,minutely&appid=${key}`;
 
     const response = await fetch(api_url);
     const data = await response.json();
