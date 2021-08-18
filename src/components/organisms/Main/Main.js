@@ -46,9 +46,12 @@ const StyledDescription = styled.p`
 `;
 
 const Main = () => {
-  const { dt, details, sys, main, icon, description } = useSelector(
-    (state) => state.locations[0]?.weather
-  );
+  const city = useSelector((state) => state.states.city);
+  const state = useSelector((state) => state);
+
+  const { dt, details, sys, main, icon, description } = city
+    ? state.locations.filter((location) => location.city === city)[0].weather
+    : state.locations[0].weather;
 
   return (
     <Wrapper>

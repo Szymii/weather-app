@@ -37,6 +37,7 @@ const stateSlice = createSlice({
   initialState: {
     theme: userPrefersDark ? 'dark' : 'light',
     isSelectOpen: false,
+    city: null,
   },
   reducers: {
     toggleTheme: (state, action) => {
@@ -44,6 +45,9 @@ const stateSlice = createSlice({
     },
     toggleSelect: (state, action) => {
       return { ...state, isSelectOpen: action.payload.isSelectOpen };
+    },
+    setCity: (state, action) => {
+      return { ...state, city: action.payload.city };
     },
   },
 });
@@ -71,15 +75,24 @@ const locationSlice = createSlice({
         sys,
         ...description[0],
       };
+
       return [...state, { city, coord, weather }];
     });
 
+    builder.addDefaultCase((state, action) => state);
+  },
+});
+
+const forecastSlice = createSlice({
+  name: 'forecast',
+  initialState: [],
+  extraReducers: (builder) => {
     builder.addCase(getForecat.fulfilled, (state, action) => {
       const forecast = {
         hourly: action.payload.data.hourly,
         daily: action.payload.data.daily,
       };
-      return [{ ...state[0], forecast }];
+      return { ...forecast };
     });
 
     builder.addDefaultCase((state, action) => state);
@@ -89,9 +102,10 @@ const locationSlice = createSlice({
 const store = configureStore({
   reducer: {
     locations: locationSlice.reducer,
+    forecast: forecastSlice.reducer,
     states: stateSlice.reducer,
   },
 });
 
-export const { toggleTheme, toggleSelect } = stateSlice.actions;
+export const { setCity, toggleTheme, toggleSelect } = stateSlice.actions;
 export default store;

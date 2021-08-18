@@ -5,8 +5,9 @@ import add from '../../../assets/icons/add.svg';
 import City from '../../atoms/City/City';
 import { FormField } from '../../atoms/FormField/FormField';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSelect } from '../../../store';
-import { getLocalWeather } from '../../../store';
+import { toggleSelect, setCity } from '../../../store';
+import { getLocalWeather, getForecat } from '../../../store';
+import { uniq } from '../../../utils/utils';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -58,6 +59,7 @@ const BtnWrapper = styled.div`
 const Select = () => {
   const isOpen = useSelector((state) => state.states.isSelectOpen);
   const cities = useSelector((state) => state.locations);
+  const citiesSet = uniq(cities, (cities) => cities.city);
   const dispatch = useDispatch();
   const inputEl = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -68,17 +70,31 @@ const Select = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const value = inputEl.current.value.trim();
 
     if (!visible) {
-      setVisible((prev) => !prev);
+      setVisible(true);
       inputEl.current.style.visibility = 'visible';
       inputEl.current.focus();
     } else {
-      setVisible((prev) => !prev);
+      setVisible(false);
       inputEl.current.style.visibility = 'hidden';
-      dispatch(getLocalWeather({ city: inputEl.current.value }));
+      if (
+        value !== '' &&
+        !citiesSet.filter((city) => city.city === value).length
+      )
+        dispatch(getLocalWeather({ city: value }));
       inputEl.current.value = '';
     }
+  };
+
+  const handleSelectCity = (city) => {
+    const { lat, lon } = city.coord;
+    dispatch(getForecat({ lat, lon }));
+    dispatch(setCity({ city: city.city }));
+    setVisible(false);
+    inputEl.current.style.visibility = 'hidden';
+    dispatch(toggleSelect({ isSelectOpen: false }));
   };
 
   return (
@@ -96,8 +112,12 @@ const Select = () => {
         </form>
       </BtnWrapper>
       <CityList>
-        {cities.map((city) => (
-          <City key={city.city} value={city} />
+        {citiesSet.map((city) => (
+          <City
+            key={city.city}
+            value={city}
+            onClick={() => handleSelectCity(city)}
+          />
         ))}
       </CityList>
     </Wrapper>

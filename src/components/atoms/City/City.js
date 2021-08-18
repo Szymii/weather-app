@@ -25,9 +25,9 @@ const StyledDescription = styled.div`
   font-size: ${({ theme }) => theme.fs.s};
 `;
 
-const City = ({ value }) => {
+const City = ({ value, ...rest }) => {
   return (
-    <StyledLi>
+    <StyledLi {...rest}>
       <Wrapper>
         <StyledTitle>{value.city}</StyledTitle>
         <div>{round(value.weather.details.temp)}&#176;C</div>

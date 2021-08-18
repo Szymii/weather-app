@@ -37,8 +37,10 @@ const BtnWrapper = styled.div`
 `;
 
 const Navigation = () => {
-  const state = useSelector((state) => state.locations[0]);
-  const isOpen = useSelector((state) => state.states.isSelectOpen);
+  const state = useSelector((state) => state);
+  const isOpen = state.states.isSelectOpen;
+  const city = state.states.city ? state.states.city : state.locations[0].city;
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -48,7 +50,7 @@ const Navigation = () => {
   return (
     <StyledNav>
       <Wrapper>
-        <Location location={state?.city} />
+        <Location location={city} />
         <BtnWrapper>
           <IconBtn onClick={handleClick} aria-label="select city">
             <img src={map} alt="map" />

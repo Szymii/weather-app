@@ -35,6 +35,7 @@ const StyledSection = styled.section`
     max-width: 60em;
     height: 80vh;
     margin: 0 auto;
+    padding: 0;
   }
 `;
 

@@ -25,9 +25,9 @@ const Subtitle = styled.h3`
 `;
 
 const Forecast = () => {
-  const state = useSelector((state) => state.locations[0]);
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { lat, lon } = state.coord;
+  const { lat, lon } = state.locations[0].coord;
 
   useEffect(() => {
     dispatch(getForecat({ lat, lon }));
@@ -36,7 +36,7 @@ const Forecast = () => {
   return (
     <Wrapper>
       <Title>Forecast</Title>
-      {!state?.forecast ? (
+      {!state.forecast.hourly ? (
         <>Loadig...</>
       ) : (
         <ForecastWrapper>
