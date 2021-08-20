@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { light, dark } from '../assets/styles/theme';
 import View from './View';
+import Splash from './Splash';
 import Select from '../components/organisms/Select/Select';
 import styled from 'styled-components';
 
@@ -43,18 +44,16 @@ const GlobalWrapper = () => {
   }, [dispatch, error, success]);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       {!state.locations.length ? (
-        <>Loading...</>
+        <Splash />
       ) : (
-        <ThemeProvider theme={theme}>
-          <Wrapper>
-            <View />
-            <Select />
-          </Wrapper>
-        </ThemeProvider>
+        <Wrapper>
+          <View />
+          <Select />
+        </Wrapper>
       )}
-    </>
+    </ThemeProvider>
   );
 };
 

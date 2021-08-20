@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSelect, setCity } from '../../../store';
 import { getLocalWeather, getForecat } from '../../../store';
 import { uniq } from '../../../utils/utils';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -45,6 +46,11 @@ const StyledBtn = styled.button`
   align-items: center;
   padding: 0.2em 0.4em;
   cursor: pointer;
+
+  img {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
 `;
 
 const BtnWrapper = styled.div`
@@ -63,6 +69,7 @@ const Select = () => {
   const dispatch = useDispatch();
   const inputEl = useRef(null);
   const [visible, setVisible] = useState(false);
+  const { addToLocalStorage } = useLocalStorage();
 
   const handleToggle = () => {
     dispatch(toggleSelect({ isSelectOpen: false }));
@@ -82,8 +89,10 @@ const Select = () => {
       if (
         value !== '' &&
         !citiesSet.filter((city) => city.city === value).length
-      )
+      ) {
         dispatch(getLocalWeather({ city: value }));
+        addToLocalStorage(value);
+      }
       inputEl.current.value = '';
     }
   };

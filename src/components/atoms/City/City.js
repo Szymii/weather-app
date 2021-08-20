@@ -8,6 +8,9 @@ const StyledLi = styled.li`
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  img {
+    width: 5rem;
+  }
 `;
 
 const Wrapper = styled.div`

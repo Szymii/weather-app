@@ -20,11 +20,11 @@ const Wrapper = styled.div`
 
 const StyledTemperature = styled.div`
   color: ${({ theme }) => theme.colors.black};
-  font-size: 92px;
+  font-size: 5.75rem;
 `;
 
 const StyledUnit = styled.span`
-  font-size: 36px;
+  font-size: 2.25rem;
   vertical-align: baseline;
 `;
 

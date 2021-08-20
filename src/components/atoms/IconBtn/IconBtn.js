@@ -5,7 +5,7 @@ const StyledBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 0.8em;
+  padding: 0.8rem;
 
   &:focus,
   &:hover {
@@ -13,9 +13,14 @@ const StyledBtn = styled.button`
   }
 
   svg {
-    width: 1.7em;
-    height: 1.7em;
+    width: 1.5rem;
+    height: 1.5rem;
     fill: ${({ theme }) => theme.colors.middle};
+  }
+
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;
 
