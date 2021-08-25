@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { extractHour } from '../../../utils/utils';
+import { extractHour, round } from '../../../utils/utils';
 
 const ListItem = styled.li`
   flex: none;
@@ -24,6 +24,10 @@ const StyledImg = styled.img`
   height: auto;
 `;
 
+const StyledTemp = styled.div`
+  color: ${({ theme }) => theme.colors.middle};
+`;
+
 const Hour = ({ hour }) => {
   return (
     <ListItem>
@@ -33,6 +37,7 @@ const Hour = ({ hour }) => {
         alt={hour.weather[0].main}
         aria-label={hour.weather[0].description}
       />
+      <StyledTemp>{round(hour.temp)}&#176;C</StyledTemp>
     </ListItem>
   );
 };

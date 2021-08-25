@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getLocalWeather } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
@@ -16,37 +16,48 @@ const Wrapper = styled.div`
 const GlobalWrapper = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  const [offline, setOffline] = useState(null);
 
   const theme = state.states.theme === 'light' ? light : dark;
 
-  const success = useCallback(
+  const dispatchWeather = useCallback(
     (position) => {
       dispatch(
-        getLocalWeather({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
+        getLocalWeather(
+          position
+            ? {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+              }
+            : ''
+        )
+      )
+        .unwrap()
+        .then(() => {
+          setOffline(null);
         })
-      );
+        .catch((error) => {
+          setOffline(error.message);
+        });
     },
     [dispatch]
   );
 
-  const error = useCallback(() => {
-    dispatch(getLocalWeather({}));
-  }, [dispatch]);
+  const success = useCallback(dispatchWeather, [dispatchWeather]);
+  const error = useCallback(dispatchWeather, [dispatchWeather]);
 
   useEffect(() => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
-      dispatch(getLocalWeather({}));
+      dispatchWeather();
     }
-  }, [dispatch, error, success]);
+  }, [dispatchWeather, error, success]);
 
   return (
     <ThemeProvider theme={theme}>
       {!state.locations.length ? (
-        <Splash />
+        <Splash offline={offline} />
       ) : (
         <Wrapper>
           <View />

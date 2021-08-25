@@ -9,6 +9,7 @@ import { toggleSelect, setCity } from '../../../store';
 import { getLocalWeather, getForecat } from '../../../store';
 import { uniq } from '../../../utils/utils';
 import useLocalStorage from '../../../hooks/useLocalStorage';
+import ErrorModal from '../../molecules/ErrorModal/ErrorModal';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -70,6 +71,7 @@ const Select = () => {
   const inputEl = useRef(null);
   const [visible, setVisible] = useState(false);
   const { addToLocalStorage } = useLocalStorage();
+  const [error, setError] = useState(null);
 
   const handleToggle = () => {
     dispatch(toggleSelect({ isSelectOpen: false }));
@@ -90,8 +92,17 @@ const Select = () => {
         value !== '' &&
         !citiesSet.filter((city) => city.city === value).length
       ) {
-        dispatch(getLocalWeather({ city: value }));
-        addToLocalStorage(value);
+        dispatch(getLocalWeather({ city: value }))
+          .unwrap()
+          .then(() => {
+            addToLocalStorage(value);
+          })
+          .catch((error) => {
+            setError(error.message);
+            setTimeout(() => {
+              setError(null);
+            }, 8000);
+          });
       }
       inputEl.current.value = '';
     }
@@ -108,6 +119,7 @@ const Select = () => {
 
   return (
     <Wrapper isOpen={isOpen}>
+      {error ? <ErrorModal errorMessage={error} /> : null}
       <BtnWrapper>
         <StyledBtn aria-label="return" onClick={handleToggle}>
           <img src={back} alt="return" />

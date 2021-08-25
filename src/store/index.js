@@ -9,22 +9,33 @@ export const getLocalWeather = createAsyncThunk(
     let api_url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${key}`;
     if (city)
       api_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`;
-    const response = await fetch(api_url);
-    const data = await response.json();
 
-    return { data };
+    try {
+      const response = await fetch(api_url);
+      if (!response.ok) throw new Error('City Not Found');
+      const data = await response.json();
+
+      return { data };
+    } catch (err) {
+      if (err.message !== 'City Not Found') throw Error('Could Not Connect');
+      throw Error(err.message);
+    }
   }
 );
 
 export const getForecat = createAsyncThunk(
   'weather/getForecast',
   async ({ lat, lon }) => {
-    const api_url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=alerts,current,minutely&appid=${key}`;
+    try {
+      const api_url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=alerts,current,minutely&appid=${key}`;
 
-    const response = await fetch(api_url);
-    const data = await response.json();
+      const response = await fetch(api_url);
+      const data = await response.json();
 
-    return { data };
+      return { data };
+    } catch (err) {
+      throw Error('Could Not Connect');
+    }
   }
 );
 
@@ -78,21 +89,28 @@ const locationSlice = createSlice({
 
       return [...state, { city, coord, weather }];
     });
-
     builder.addDefaultCase((state, action) => state);
   },
 });
 
 const forecastSlice = createSlice({
   name: 'forecast',
-  initialState: [],
+  initialState: { forecast: [], loading: true },
   extraReducers: (builder) => {
+    builder.addCase(getForecat.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+
+    builder.addCase(getForecat.rejected, (state, action) => {
+      return { ...state, loading: 'iddle' };
+    });
+
     builder.addCase(getForecat.fulfilled, (state, action) => {
       const forecast = {
         hourly: action.payload.data.hourly,
         daily: action.payload.data.daily,
       };
-      return { ...forecast };
+      return { ...forecast, loading: false };
     });
 
     builder.addDefaultCase((state, action) => state);

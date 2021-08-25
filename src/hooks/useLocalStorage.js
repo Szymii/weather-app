@@ -15,9 +15,7 @@ const useLocalStorage = () => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(localCities);
-  }, [localCities]);
+  useEffect(() => {}, [localCities]);
 
   const addToLocalStorage = (city) => {
     const newLocalCities = [...localCities, city];

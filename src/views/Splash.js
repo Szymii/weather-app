@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Title } from '../components/atoms/Title/Title';
+import ErrorModal from '../components/molecules/ErrorModal/ErrorModal';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,9 +18,10 @@ const StyledTitle = styled(Title)`
   margin: auto 0;
 `;
 
-const Splash = () => {
+const Splash = ({ offline }) => {
   return (
     <Wrapper>
+      <ErrorModal errorMessage={offline} />
       <StyledTitle>Weather</StyledTitle>
       <span>A minimal weather app</span>
     </Wrapper>
