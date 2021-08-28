@@ -1,7 +1,7 @@
 export const light = {
   colors: {
     black: '#000000',
-    middle: '#616161',
+    middle: '#8a8a8a',
     white: '#ffffff',
   },
   fs: {
