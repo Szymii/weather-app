@@ -25,7 +25,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [new Dotenv()],
+  plugins: [
+    new Dotenv({
+      systemvars: true,
+    }),
+  ],
   optimization: {
     minimizer: [
       new TerserPlugin({
