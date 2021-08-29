@@ -21,7 +21,7 @@ const StyledTitle = styled(Title)`
 const Splash = ({ offline }) => {
   return (
     <Wrapper>
-      <ErrorModal errorMessage={offline} />
+      {offline ? <ErrorModal errorMessage={offline} /> : null}
       <StyledTitle>Weather</StyledTitle>
       <span>A minimal weather app</span>
     </Wrapper>

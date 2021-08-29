@@ -24,7 +24,7 @@ const GlobalWrapper = () => {
     (position) => {
       dispatch(
         getLocalWeather(
-          position
+          position.coords
             ? {
                 lat: position.coords.latitude,
                 lon: position.coords.longitude,
