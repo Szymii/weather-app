@@ -4,10 +4,11 @@ import { Title } from '../Title/Title';
 import { round } from '../../../utils/utils';
 
 const StyledLi = styled.li`
-  margin-top: 1em;
+  margin: 1em 0.1em 0.1em;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  padding: 10px;
   img {
     width: 5rem;
   }
@@ -30,7 +31,7 @@ const StyledDescription = styled.div`
 
 const City = ({ value, ...rest }) => {
   return (
-    <StyledLi {...rest}>
+    <StyledLi {...rest} tabIndex="0">
       <Wrapper>
         <StyledTitle>{value.city}</StyledTitle>
         <div>{round(value.weather.details.temp)}&#176;C</div>
