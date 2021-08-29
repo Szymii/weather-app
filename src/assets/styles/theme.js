@@ -3,6 +3,7 @@ export const light = {
     black: '#000000',
     middle: '#8a8a8a',
     white: '#ffffff',
+    svg: '#616161',
   },
   fs: {
     xs: '0.75rem',
@@ -23,6 +24,7 @@ export const dark = {
     black: light.colors.white,
     middle: light.colors.middle,
     white: light.colors.black,
+    svg: light.colors.svg,
   },
   fs: light.fs,
   media: light.media,

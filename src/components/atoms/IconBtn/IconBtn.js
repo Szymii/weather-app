@@ -15,7 +15,7 @@ const StyledBtn = styled.button`
   svg {
     width: 1.5rem;
     height: 1.5rem;
-    fill: ${({ theme }) => theme.colors.middle};
+    fill: ${({ theme }) => theme.colors.svg};
   }
 
   img {
